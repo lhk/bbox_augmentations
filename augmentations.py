@@ -111,6 +111,11 @@ def boxes_to_vertices(boxes):
     return vertices
 
 def vertices_to_boxes(vertices):
+    """
+    Takes a list of vertices and converts them to bounding boxes
+    :param vertices: Input tensor, must be 2D
+    :return: output tensor, 2D
+    """
 
     assert len(vertices.shape)==2, "vertices must be a 2D tensor"
     assert vertices.shape[1]==2, "vertices must be [:, 2] tensor"
