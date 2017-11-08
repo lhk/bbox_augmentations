@@ -48,6 +48,39 @@ def draw_rect(canvas, rect, color=1, thickness=0):
 
     return canvas
 
+def draw_point(canvas, point, color=1, thickness=1):
+    """
+    plots a point into a numpy array
+    coordinates of the point are in [0,1]
+    :param canvas:
+    :param point:
+    :param color:
+    :param thickness:
+    :return:
+    """
+    size_x, size_y = canvas.shape[:2]
+    px, py = point
+
+    assert 0 <= px <= 1, "coordinates must be in [0,1]"
+    assert 0 <= py <= 1, "coordinates must be in [0,1]"
+
+    if thickness <= 0:
+        thickness = 1
+
+    min_x = int(px * size_x - thickness)
+    min_y = int(py * size_y - thickness)
+    max_x = int(px * size_x + thickness)
+    max_y = int(py * size_y + thickness)
+
+    min_x = np.maximum(min_x, 0)
+    min_y = np.maximum(min_y, 0)
+    max_x = np.minimum(size_x - 1, max_x)
+    max_y = np.minimum(size_y - 1, max_y)
+
+    canvas[min_x:max_x, min_y:max_y] = color
+
+    return canvas
 
 def plot_canvas(canvas):
     plt.imshow(canvas)
+
